@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Grupos do Tema: {{ tema.titulo }}{% endblock %}
+
+{% block content %}
+<h2>Grupos do Tema: {{ tema.titulo }}</h2>
+<p><strong>Data da Apresentação:</strong> {{ tema.data_apresentacao }}</p>
+<p><strong>Horário:</strong> {{ tema.horario_inicio }} - {{ tema.horario_fim }}</p>
+
+<!-- Lista de grupos -->
+<ul class="list-group mt-4">
+    {% for grupo in grupos %}
+    <li class="list-group-item">
+        <h5>{{ grupo.nome }} — Ordem: {{ grupo.ordem_apresentacao }}</h5>
+        <p><strong>Horário de Apresentação:</strong> {{ grupo.horario_apresentacao }}</p>
+        <p><strong>Integrantes:</strong></p>
+        <ul>
+            {% for aluno in grupo.alunos.all %}
+            <li>{{ aluno.nome }} ({{ aluno.matricula }})</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% empty %}
+    <li class="list-group-item">Nenhum grupo foi alocado ainda.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Lista de Alunos{% endblock %}
+{% block content %}
+<h2>👥 Alunos Cadastrados</h2>
+<ul class="list-group">
+    {% for aluno in page_obj %}
+    <li class="list-group-item">{{ aluno.nome }} - Matrícula: {{ aluno.matricula }}</li>
+    {% empty %}
+    <li class="list-group-item">Nenhum aluno cadastrado.</li>
+    {% endfor %}
+</ul>
+
+<div>
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

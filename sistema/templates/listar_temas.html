@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Lista de Temas{% endblock %}
+{% block content %}
+<h2>📚 Temas Cadastrados</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Quantidade de Grupos</th>
+            <th>Data de Apresentação</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tema in temas %}
+        <tr>
+            <td>{{ tema.id }}</td>
+            <td>{{ tema.titulo }}</td>
+            <td>{{ tema.quantidade_grupos }}</td>
+            <td>{{ tema.data_apresentacao }}</td>
+            <td>
+                <a href="{% url 'alocar_grupos' tema.id %}" class="btn btn-warning btn-sm">Alocar Grupos</a>
+                <a href="{% url 'listar_grupos' tema.id %}" class="btn btn-info btn-sm">Ver Grupos</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Nenhum tema cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
