@@ -5,9 +5,6 @@ from .models import Aluno, Tema, Grupo
 from .forms import AlunoForm, TemaForm
 from .utils import distribuir_alunos_e_sortear
 
-# Página inicial
-
-
 def home(request):
     return render(request, 'home.html')
 
@@ -40,9 +37,6 @@ def listar_alunos(request):
 
 
 def cadastrar_tema(request):
-    """
-    View para cadastrar um novo tema.
-    """
     if request.method == 'POST':
         form = TemaForm(request.POST)
         if form.is_valid():
@@ -58,9 +52,6 @@ def cadastrar_tema(request):
 
 
 def listar_temas(request):
-    """
-    View para listar todos os temas cadastrados.
-    """
     temas = Tema.objects.all()  # Obtém todos os temas do banco de dados
     return render(request, 'listar_temas.html', {'temas': temas})
 
@@ -68,9 +59,6 @@ def listar_temas(request):
 
 
 def alocar_grupos(request, tema_id):
-    """
-    View para alocar alunos automaticamente nos grupos e sortear a ordem de apresentação.
-    """
     tema = get_object_or_404(
         Tema, id=tema_id)  # Busca o tema pelo ID ou retorna 404
 
@@ -102,9 +90,6 @@ def alocar_grupos(request, tema_id):
 
 
 def listar_grupos(request, tema_id):
-    """
-    View para listar os grupos de um tema específico.
-    """
     tema = get_object_or_404(Tema, id=tema_id)
     grupos = Grupo.objects.filter(tema=tema).order_by('ordem_apresentacao')
     return render(request, 'listar_grupos.html', {'tema': tema, 'grupos': grupos})

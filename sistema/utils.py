@@ -4,14 +4,6 @@ from .models import Grupo, Aluno
 
 
 def distribuir_alunos_e_sortear(tema, alunos):
-    """
-    Distribui alunos automaticamente nos grupos, sorteia a ordem de apresentação
-    e atribui horários de apresentação com base no tempo disponível.
-
-    Args:
-        tema (Tema): Instância do modelo Tema.
-        alunos (QuerySet): QuerySet de alunos a serem distribuídos.
-    """
     # Embaralhar os alunos para garantir aleatoriedade
     alunos = list(alunos)
     random.shuffle(alunos)
